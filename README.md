@@ -6,7 +6,7 @@ Tokenize an English sentence to phrases
 ## Installation
 
 ```bash
-pip install phrase-tokenizer
+# not ready yet pip install phrase-tokenizer
 # pip install phrase-tokenizer -U to update
 ```
 
@@ -50,6 +50,6 @@ from phrase_tokenizer.phrase_tok import plot_tree
 plot_tree("Short cuts make long delay.")
 ```
 
-![img](https://raw.githubusercontent.com/ffreemt/phrase-tokenizer/master/img/short-cuts.png)
+![img](https://github.com/ffreemt/phrase-tokenizer/blob/master/img/short_cuts.png?raw=true)
 
 
