@@ -128,7 +128,7 @@ def phrase_tok(
         # print(seq)
         logger.info("\n%s", seq)
 
-    _ = re.split(r'(?:(?<!\d)[,]|[,](?!\d)|[;:/|])', seq)
+    _ = re.split(r'(?:(?<!\d)[,]|[,](?!\d)|[;:/|—])', seq)
     _ = [re.sub(r"[\s.^]+", " ", elm).strip() for elm in _ if re.sub(r"[.\s^]+", " ", elm).strip()]
 
     return _
