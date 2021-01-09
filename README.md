@@ -6,7 +6,7 @@ Tokenize an English sentence to phrases
 ## Installation
 
 ```bash
-# not ready yet pip install phrase-tokenizer
+pip install phrase-tokenizer
 # pip install phrase-tokenizer -U to update
 ```
 
