@@ -29,13 +29,13 @@ poetry install
 ```python
 from phrase_tokenizer import phrase_tok
 
-res = phrase_tok("Short cuts make long delay.")
+res = phrase_tok("Short cuts make long delays.")
 print(res)
-# ['Short cuts', 'make long delay']
+# ['Short cuts', 'make long delays']
 
 # verbose=True turns on verbose to see the tokenizing process
-res = phrase_tok("Short cuts make long delay", verbose=True)
-# ',..Short.cuts,.make..long.delay..'
+res = phrase_tok("Short cuts make long delays", verbose=True)
+# ',..Short.cuts,.make..long.delays..'
 ```
 
 Consult the source code for details.
@@ -53,7 +53,7 @@ In `jupyter notebook`, ``plot_tree`` is able to draw a nice tree to aid the deve
 ```python
 from phrase_tokenizer.phrase_tok import plot_tree
 
-plot_tree("Short cuts make long delay.")
+plot_tree("Short cuts make long delays.")
 ```
 
 ![img](https://github.com/ffreemt/phrase-tokenizer/blob/master/img/short_cuts.png?raw=true)
