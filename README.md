@@ -1,5 +1,5 @@
 # Phrase Tokenizer
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![PyPI version](https://badge.fury.io/py/phrase-tokenizer.svg)](https://badge.fury.io/py/phrase-tokenizer)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d7e1c1f44dbb423099a929aadd7db2fd)](https://www.codacy.com/gh/ffreemt/phrase-tokenizer/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ffreemt/phrase-tokenizer&amp;utm_campaign=Badge_Grade)[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![PyPI version](https://badge.fury.io/py/phrase-tokenizer.svg)](https://badge.fury.io/py/phrase-tokenizer)
 
 Tokenize an English sentence to phrases
 
@@ -55,7 +55,6 @@ from phrase_tokenizer.phrase_tok import plot_tree
 
 plot_tree("Short cuts make long delays.")
 ```
-
 ![img](https://github.com/ffreemt/phrase-tokenizer/blob/master/img/short_cuts.png?raw=true)
 
 
