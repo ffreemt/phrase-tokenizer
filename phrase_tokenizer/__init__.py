@@ -1,6 +1,6 @@
 """Init."""
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
-from .phrase_tok import phrase_tok
+from .phrase_tok import phrase_tok  # noqa: F401
 
-all = ("phrase_toke",)
+__all__ = ("phrase_tok",)

@@ -11,6 +11,7 @@ from typing import (
 
 import sys
 import re
+from nltk.tree import Tree
 import tensorflow
 from logzero import logger
 
@@ -27,7 +28,7 @@ import benepar
 import svgling
 
 try:
-    from IPython.core import display
+    from IPython.core import display  # pylint: disable=import-error  # for notebook
 except ModuleNotFoundError:
     display = ""
 
@@ -37,7 +38,7 @@ c_list = ["TO", "S", "VP", "VB", "NP", "VBD", "VBG", "PP", "SBAR", "SB"]
 c_list1 = ["CC", "IN"]
 
 
-# pylint: disable=too-many-branches
+# pylint: disable=too-many-branches, too-many-statements
 # fmt: off
 def phrase_tok(
         sent: str,
@@ -134,9 +135,17 @@ def phrase_tok(
     return _
 
 
-def show_tree(sent: str, cnf: bool = False) -> None:
+# fmt: off
+def show_tree(
+        sent: Union[str,  Tree],
+        cnf: bool = False
+) -> None:
+    # fmt: on
     """Display tree of sent."""
-    tree = parser.parse(sent)
+    if isinstance(sent, str):
+        tree = parser.parse(sent)
+    else:
+        tree = sent  # already a Tree
     if cnf:
         tree.chomsky_normal_form()
     tree.pprint()
