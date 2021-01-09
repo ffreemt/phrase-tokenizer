@@ -1,1 +1,0 @@
-rsync -uvazn ./ duanzi:myapps/phrase-tokenizer/ --exclude rsync-duanzi-to-win10.bat --exclude rsync-win10-to-duanzi.bat --exclude .venv --exclude .git --exclude *.pyc --exclude __pycache__
