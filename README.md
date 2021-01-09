@@ -15,7 +15,13 @@ Or clone the repo `https://github.com/ffreemt/phrase-tokenizer.git`:
 ```bash
 git clone https://github.com/ffreemt/phrase-tokenizer.git
 cd phrase-tokenizer
-pip install -r requirements.txt
+pip install logzero benepar tensorflow
+```
+Or use `poetry`, e.g.
+```bash
+git clone https://github.com/ffreemt/phrase-tokenizer.git
+cd phrase-tokenizer
+poetry install
 ```
 
 ## Usage
@@ -23,7 +29,7 @@ pip install -r requirements.txt
 ```python
 from phrase_tokenizer import phrase_tok
 
-res = phrase_tok("Short cuts make long delay")
+res = phrase_tok("Short cuts make long delay.")
 print(res)
 # ['Short cuts', 'make long delay']
 
