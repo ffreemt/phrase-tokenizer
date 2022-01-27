@@ -11,6 +11,7 @@ from typing import (
 
 import sys
 import re
+import nltk
 from nltk.tree import Tree
 import tensorflow
 from logzero import logger
@@ -20,12 +21,20 @@ try:
     if tensorflow.__version__ > "2.0":
         sys.modules["tensorflow"] = tensorflow.compat.v1
 except Exception as exc:
-    print("Patch exc: %s" % exc)
-    raise SystemExit(1) from exc
+    logger.info("Trying one more time...")
+    try:
+        sys.modules["tensorflow"] = tensorflow.compat
+    except Exception as exc:
+        print("Patch exc: %s" % exc)
+        raise SystemExit(1) from exc
 
 # pylint: disable=wrong-import-position, invalid-name
 import benepar
 import svgling
+
+# make sure punkt is available
+nltk.download('punkt')
+benepar.download('benepar_en2')
 
 try:
     from IPython.core import display  # pylint: disable=import-error  # for notebook
