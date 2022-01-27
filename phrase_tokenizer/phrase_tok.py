@@ -19,11 +19,11 @@ from logzero import logger
 # patch tensorflow 2.x for benepar
 try:
     if tensorflow.__version__ > "2.0":
-        sys.modules["tensorflow"] = tensorflow.compat.v1
+        sys.modules["tensorflow"] = tensorflow.compat.v1  # for earlier tf2.x
 except Exception as exc:
     logger.info("Trying one more time...")
     try:
-        sys.modules["tensorflow"] = tensorflow.compat
+        sys.modules["tensorflow"] = tensorflow.compat  # for later tf2.x
     except Exception as exc:
         print("Patch exc: %s" % exc)
         raise SystemExit(1) from exc

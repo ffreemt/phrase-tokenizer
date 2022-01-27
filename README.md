@@ -8,6 +8,8 @@ Tokenize an English sentence to phrases
 ```bash
 pip install phrase-tokenizer
 # pip install phrase-tokenizer -U to update
+# or to install the latest from github:
+# pip git+https://github.com/ffreemt/phrase-tokenizer.git
 ```
 
 Or clone the repo `https://github.com/ffreemt/phrase-tokenizer.git`:
@@ -48,7 +50,7 @@ cd phrase-tokenizer
 pip install -r requirements-dev.txt
 ```
 
-In `jupyter notebook`, ``plot_tree`` is able to draw a nice tree to aid the development, e.g.,
+In `ipython`, ``plot_tree`` is able to draw a nice tree to aid the development, e.g.,
 
 ```python
 from phrase_tokenizer.phrase_tok import plot_tree
