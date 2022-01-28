@@ -1,9 +1,9 @@
-name: on-push-schedule-extend-noip
+name: pytest
 
 on:
   push:
 jobs:
-  extend-noip__main__:
+  pytest:
     strategy:
       fail-fast: true
       matrix:
