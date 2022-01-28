@@ -11,8 +11,8 @@ from typing import (
 
 # import sys
 import re
-import nltk
 import ssl
+import nltk
 from nltk.tree import Tree
 
 # import tensorflow
@@ -39,11 +39,11 @@ except Exception as exc:
 
 # fix ssl certificate errors
 try:
-    _create_unverified_https_context = ssl._create_unverified_context
+    _create_unverified_https_context = ssl._create_unverified_context  # pylint: disable=protected-access
 except AttributeError:
     pass
 else:
-    ssl._create_default_https_context = _create_unverified_https_context
+    ssl._create_default_https_context = _create_unverified_https_context  # pylint: disable=protected-access
 
 # make sure punkt is available
 nltk.download('punkt')
@@ -56,6 +56,7 @@ try:
 except ModuleNotFoundError:
     display = ""
 
+parser = benepar.Parser("benepar_en3")
 c_list = ["TO", "S", "VP", "VB", "NP", "VBD", "VBG", "PP", "SBAR", "SB"]
 c_list1 = ["CC", "IN"]
 
@@ -70,8 +71,12 @@ def phrase_tok(
     # fmt: on
     """Segment a sent to list of phrases.
 
-    dis_label2
-    cnf: transforms the tree to Chomsky normal form first
+    Args:
+        sent: sentence to segment
+        cnf: (bool) transforms the tree to Chomsky normal form first
+
+    Returns:
+        segmenteed phrases
     """
     tree = parser.parse(sent)
 
