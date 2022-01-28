@@ -8,10 +8,10 @@ repository = "https://github.com/ffreemt/phrase-tokenizer"
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
-benepar = "^0.1.2"
+benepar = "^0.2.0"
 logzero = "^1.6.3"
 nltk = "^3.2.5"
-tensorflow = "^2.4.0"
+# tensorflow = "^2.4.0"
 svgling = "^0.3.0"
 
 [tool.poetry.dev-dependencies]

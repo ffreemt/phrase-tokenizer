@@ -9,14 +9,22 @@ from typing import (
     Union,
 )
 
-import sys
+# import sys
 import re
 import nltk
+import ssl
 from nltk.tree import Tree
-import tensorflow
+
+# import tensorflow
 from logzero import logger
 
+# pylint: disable=wrong-import-position, invalid-name
+import benepar
+import svgling
+
 # patch tensorflow 2.x for benepar
+_ = """  # no need to patch since benepar 0.2.0?
+# benepar switched to pytorch and spacy instead of tensorflow
 try:
     if tensorflow.__version__ > "2.0":
         sys.modules["tensorflow"] = tensorflow.compat.v1  # for earlier tf2.x
@@ -25,23 +33,28 @@ except Exception as exc:
     try:
         sys.modules["tensorflow"] = tensorflow.compat  # for later tf2.x
     except Exception as exc:
-        print("Patch exc: %s" % exc)
+        logger.error("Patch exc: %s", exc)
         raise SystemExit(1) from exc
+# """
 
-# pylint: disable=wrong-import-position, invalid-name
-import benepar
-import svgling
+# fix ssl certificate errors
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 
 # make sure punkt is available
 nltk.download('punkt')
-benepar.download('benepar_en2')
+# benepar.download('benepar_en2')
+benepar.download('benepar_en3')
 
 try:
-    from IPython.core import display  # pylint: disable=import-error  # for notebook
+    # from IPython.core import display
+    from IPython.display import display  # pylint: disable=import-error  # for notebook
 except ModuleNotFoundError:
     display = ""
-
-parser = benepar.Parser("benepar_en2")
 
 c_list = ["TO", "S", "VP", "VB", "NP", "VBD", "VBG", "PP", "SBAR", "SB"]
 c_list1 = ["CC", "IN"]
@@ -80,13 +93,10 @@ def phrase_tok(
         # 'The ones for sale online are all out of stock.'
         # """
         if elm.label() in c_list1:
-#                 try:
             _ = positions[idx - 3]
-#             print(idx, idx - 3, _)
             _ = tree[_]
             if not isinstance(_, str):
                 _ = _.label()
-#                 print('label', _)
             if _ in ["IN"]:
                 seq += "^"
                 continue
@@ -96,13 +106,10 @@ def phrase_tok(
         if elm.label() in c_list:
             # check previous, if "IN", do not split, e.g.
             # for sale in sent = fangfang_en_sents[98]
-#                 try:
             _ = positions[idx - 2]
-#             print(idx, idx - 2, _)
             _ = tree[_]
             if not isinstance(_, str):
                 _ = _.label()
-#                 print('label', _)
             if _ in ["IN"]:
                 seq += "^"
                 continue
@@ -127,15 +134,12 @@ def phrase_tok(
 
             # one true, return "|"
             if any(map(lambda x: x in c_list, o_list)):
-
                 seq += "|"
                 continue
 
-        # return ''
         seq += "."
 
     if verbose:
-        # print(seq)
         logger.info("\n%s", seq)
 
     _ = re.split(r'(?:(?<!\d)[,]|[,](?!\d)|[;:/|—])', seq)
@@ -146,7 +150,7 @@ def phrase_tok(
 
 # fmt: off
 def show_tree(
-        sent: Union[str,  Tree],
+        sent: Union[str, Tree],
         cnf: bool = False
 ) -> None:
     # fmt: on
@@ -165,7 +169,7 @@ def plot_tree(sent: str, cnf: bool = False) -> None:
     tree = parser.parse(sent)
     if cnf:
         tree.chomsky_normal_form()
-    # if "display" in globals():
+
     if callable(display):
         display(svgling.draw_tree(tree))
     else:

@@ -1,0 +1,27 @@
+name: on-push-schedule-extend-noip
+
+on:
+  push:
+jobs:
+  extend-noip__main__:
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: [3.7, 3.8]
+        poetry-version: [1.1.2]
+        os: [ubuntu-18.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: install packages
+        run: poetry install  # --no-dev
+      - name: Run pytest tests
+        run: |
+          poetry run pytest tests
