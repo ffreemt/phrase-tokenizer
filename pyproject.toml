@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "phrase-tokenizer"
-version = "0.1.2"
+version = "0.1.3"
 description = "Tokenize an English sentence to phrases"
 authors = ["ffreemt"]
 readme = "README.md"
