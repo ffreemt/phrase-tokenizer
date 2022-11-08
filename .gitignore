@@ -1,3 +1,5 @@
 .venv
 *.bat
 dist
+**/__pycache__
+**/__pycache__/
